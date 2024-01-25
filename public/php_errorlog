@@ -1,0 +1,28 @@
+[25-Oct-2022 13:41:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
+[25-Oct-2022 13:49:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/../vendor/autoload.php' (include_path='.:/usr/local/php80/pear') in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/spadeapp.technoholicasprojects.com/public_html/spade/public/index.php on line 34
