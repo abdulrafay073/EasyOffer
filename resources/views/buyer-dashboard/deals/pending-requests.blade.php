@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                                 <?php $count = 1; ?>
-                                @foreach($dataArray as $item)
+                                @forelse($dataArray as $item)
                                 <tr class="text-center">
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $item['reqId']  }}</td>
@@ -44,23 +44,21 @@
                                     <td>{{ $item['prod_qty'] }}</td>
                                     <td>{{ date('d-M-Y', strtotime($item['date'])) }}</td>
                                     <td class="px-2">
-                                        <a href="{{ route('pending-viewdetails', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#232475">
+                                        <a href="{{ route('pending-viewdetails', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#232475">
                                             View Detail
                                         </a>
 
-                                        <form action="{{ route('delete-make-request') }}" method="POST"
-                                            style="display:inline!important">
+                                        <form action="{{ route('delete-make-request') }}" method="POST" style="display:inline!important">
                                             @csrf
                                             <input type="hidden" name="makerequestid" value="{{$item['id']}}">
-                                            <button type="submit" class="btn text-white btn-rounded"
-                                                style="background-color:#F01111">
+                                            <button type="submit" class="btn text-white btn-rounded" style="background-color:#F01111">
                                                 Delete
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

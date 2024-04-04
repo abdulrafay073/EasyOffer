@@ -30,9 +30,9 @@
                                     <th>Qty</th>
                                     <th>Shipping Method</th>
                                     <th>Payment Method</th>
-                                    <th>Required (local, import)</th>
+                                    <th hidden>Required (local, import)</th>
                                     <th>Certification</th>
-                                    <th>Sample or Real Purchase Check</th>
+                                    <th hidden>Sample or Real Purchase Check</th>
                                     <th>Origin</th>
                                 </tr>
                             </thead>
@@ -45,9 +45,9 @@
                                     <td>{{ $item['qty'] }}</td>
                                     <td>{{ $item['shipping_method'] }}</td>
                                     <td>{{ $item['payment_method'] }}</td>
-                                    <td>{{ $item['required'] }}</td>
+                                    <td hidden>{{ $item['required'] }}</td>
                                     <td>{{ $item['certification'] }}</td>
-                                    <td>
+                                    <td hidden>
                                         @if($item['sample_or_real'] == 1)
                                         Yes
                                         @else
