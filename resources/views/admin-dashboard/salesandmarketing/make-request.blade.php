@@ -3,15 +3,15 @@
 @section('content')
 
 <style>
-.itembutton {
-    font-size: 15px;
-    color: #fff;
-    background-color: #5E72E4;
-    border: transparent;
-    border-radius: 20px;
-    padding: 8px;
-    width: 150px;
-}
+    .itembutton {
+        font-size: 15px;
+        color: #fff;
+        background-color: #5E72E4;
+        border: transparent;
+        border-radius: 20px;
+        padding: 8px;
+        width: 150px;
+    }
 </style>
 
 <div class="content-wrapper">
@@ -67,9 +67,9 @@
                                         <th>Qty</th>
                                         <th>Shipping Method</th>
                                         <th>Payment Method</th>
-                                        <th>Required (local, import) </th>
+                                        <th hidden>Required (local, import) </th>
                                         <th>Certifications</th>
-                                        <th>Sample or Real purchase Check</th>
+                                        <th hidden>Sample or Real purchase Check</th>
                                         <th hidden>Price</th>
                                         <th hidden>Time Duration</th>
                                         <th>Origin</th>
@@ -78,10 +78,10 @@
                                 <tbody id="items">
                                     <tr>
                                         <td>
-                                            <select class="form-control" name="customername[]" style="width:200px">
+                                            <select class="form-control" name="customername[]" id="customername" style="width:200px">
                                                 <option selected disabled>Select customer</option>
                                                 @foreach($buyers as $item)
-                                                    <option value="{{ $item['id'] }}">{{ $item['comp_name_1'] }}</option>
+                                                <option value="{{ $item['comp_name_1'] }}">{{ $item['comp_name_1'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -90,16 +90,15 @@
                                             <select class="form-control" name="product[]" style="width:200px">
                                                 <option selected disabled>Select Product</option>
                                                 @foreach($data as $item)
-                                                    <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                                <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="description[]"
-                                                style="width:200px">
+                                            <input type="text" class="form-control" name="description[]" style="width:200px">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="qty[]" style="width:100px" id="qty" >
+                                            <input type="text" class="form-control" name="qty[]" style="width:100px" id="qty">
                                         </td>
                                         <td>
                                             <select class="form-control" name="shipping[]" style="width:200px" id="shipping">
@@ -123,7 +122,7 @@
                                                 <option value="BC - sight 90">BC - sight 90</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        <td hidden>
                                             <select class="form-control" name="required[]" style="width:200px">
                                                 <option disabled>Select Required</option>
                                                 <option value="Local">Local</option>
@@ -131,18 +130,16 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="certification[]"
-                                                style="width:200px">
+                                            <input type="text" class="form-control" name="certification[]" style="width:200px">
                                         </td>
-                                        <td>
+                                        <td hidden>
                                             <input type="checkbox" class="form-control" name="sampleorreal[]">
                                         </td>
                                         <td hidden>
                                             <input type="text" class="form-control" name="price[]" style="width:150px">
                                         </td>
                                         <td hidden>
-                                            <input type="text" class="form-control" name="timeduration[]"
-                                                style="width:150px">
+                                            <input type="text" class="form-control" name="timeduration[]" style="width:150px">
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="origin[]" style="width:150px">
@@ -153,10 +150,8 @@
                         </div>
                         <div class="row mt-4 pb-3">
                             <div class="col-md-12 mt-2 text-center">
-                                <input name="addFieldButton" type="button" value="Add Items" onclick="addField();"
-                                    class="itembutton">
-                                <input name="delFieldButton" type="button" value="Remove Items" onclick="delField();"
-                                    class="itembutton">
+                                <input name="addFieldButton" type="button" value="Add Items" onclick="addField();" class="itembutton">
+                                <input name="delFieldButton" type="button" value="Remove Items" onclick="delField();" class="itembutton">
                             </div>
                         </div>
                     </div>
@@ -172,14 +167,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-    $('#qty').on("keyup", function(){
-    var qty = $(this).val();
-    console.log(qty);
+    $('#qty').on("keyup", function() {
+        var qty = $(this).val();
+        console.log(qty);
 
-        if(qty > 100){
+        if (qty > 100) {
             $('#shipping').val("By Sea");
-        }
-        else if(qty < 100){
+        } else if (qty < 100) {
             $('#shipping').val("By Air");
         }
     })
@@ -187,103 +181,106 @@
 
 <!-- Add Row Delete Row Functionalities -->
 <script>
-counter = -1;
-var contract_selected = -1;
+    counter = -1;
+    var contract_selected = -1;
 
-function addField() {
-    counter++;
+    function addField() {
+        counter++;
 
-    var content = '';
-    content += '<tr id="RequestItem_row_' + counter + '">';
-    content += '    <td>';
-    content += '       <select class="form-control" name="customername[]">';
-    content += '            <option selected disabled>Select Customer</option>';
-    content += '            @foreach($buyers as $item)';
-    content += '                <option value="{{ $item["id"] }}">{{ $item["comp_name_1"] }}</option>';
-    content += '            @endforeach';
-    content += '        </select>'
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <select class="form-control" name="product[]">';
-    content += '            <option selected disabled>Select Product</option>';
-    content += '            @foreach($data as $item)';
-    content += '                <option value="{{ $item["id"] }}">{{ $item["name"] }}</option>';
-    content += '            @endforeach';
-    content += '       </select>';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <input type="text" name="description[]" class="form-control">';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <input type="text" name="qty[]" class="form-control" id="qty_' + counter + '">';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <select class="form-control" name="shipping[]" id="shipping_' + counter + '">';
-    content += '            <option selected disabled> Select Shipping </option>';
-    content += '            <option value="By Air">By Air</option>';
-    content += '            <option value="By Sea">By Sea</option>';
-    content += '            <option value="By Road">By Road</option>';
-    content += '        </select>';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <select class="form-control" name="payment[]">';
-    content += '            <option disabled> Select Payment </option>';
-    content += '            <option value="Advance T/T">Advance T/T</option>';
-    content += '            <option value="LC - sight" selected>LC - sight</option>';
-    content += '            <option value="LC - 30">LC - 30</option>';
-    content += '            <option value="LC - 60">LC - 60</option>';
-    content += '            <option value="LC - 90">LC - 90</option>';
-    content += '            <option value="BC - sight">BC - sight</option>';
-    content += '            <option value="BC - sight 30">BC - sight 30</option>';
-    content += '            <option value="BC - sight 60">BC - sight 60</option>';
-    content += '            <option value="BC - sight 90">BC - sight 90</option>';
-    content += '        </select>';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <select class="form-control" name="required[]">';
-    content += '            <option disabled> Select Required </option>';
-    content += '            <option value="Local">Local</option>';
-    content += '            <option value="Import" selected>Import</option>';
-    content += '        </select>';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <input type="text" name="certification[]" class="form-control">';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <input type="checkbox" name="sampleorreal[]" class="form-control">';
-    content += '    </td>';
-    content += '    <td hidden>';
-    content += '       <input type="text" name="price[]" class="form-control">';
-    content += '    </td>';
-    content += '    <td hidden>';
-    content += '       <input type="text" name="timeduration[]" class="form-control">';
-    content += '    </td>';
-    content += '    <td>';
-    content += '       <input type="text" name="origin[]" class="form-control">';
-    content += '    </td>';
-    content += '</tr>';
-    $('#items').append(content);
+        var content = '';
+        content += '<tr id="RequestItem_row_' + counter + '">';
+        content += '    <td>';
+        content += '       <select class="form-control" name="customername[]" id="customername_' + counter + '">';
+        content += '            <option selected disabled>Select Customer</option>';
+        content += '            @foreach($buyers as $item)';
+        content += '                <option value="{{ $item["comp_name_1"] }}">{{ $item["comp_name_1"] }}</option>';
+        content += '            @endforeach';
+        content += '        </select>'
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <select class="form-control" name="product[]">';
+        content += '            <option selected disabled>Select Product</option>';
+        content += '            @foreach($data as $item)';
+        content += '                <option value="{{ $item["id"] }}">{{ $item["name"] }}</option>';
+        content += '            @endforeach';
+        content += '       </select>';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <input type="text" name="description[]" class="form-control">';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <input type="text" name="qty[]" class="form-control" id="qty_' + counter + '">';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <select class="form-control" name="shipping[]" id="shipping_' + counter + '">';
+        content += '            <option selected disabled> Select Shipping </option>';
+        content += '            <option value="By Air">By Air</option>';
+        content += '            <option value="By Sea">By Sea</option>';
+        content += '            <option value="By Road">By Road</option>';
+        content += '        </select>';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <select class="form-control" name="payment[]">';
+        content += '            <option disabled> Select Payment </option>';
+        content += '            <option value="Advance T/T">Advance T/T</option>';
+        content += '            <option value="LC - sight" selected>LC - sight</option>';
+        content += '            <option value="LC - 30">LC - 30</option>';
+        content += '            <option value="LC - 60">LC - 60</option>';
+        content += '            <option value="LC - 90">LC - 90</option>';
+        content += '            <option value="BC - sight">BC - sight</option>';
+        content += '            <option value="BC - sight 30">BC - sight 30</option>';
+        content += '            <option value="BC - sight 60">BC - sight 60</option>';
+        content += '            <option value="BC - sight 90">BC - sight 90</option>';
+        content += '        </select>';
+        content += '    </td>';
+        content += '    <td hidden>';
+        content += '       <select class="form-control" name="required[]">';
+        content += '            <option disabled> Select Required </option>';
+        content += '            <option value="Local">Local</option>';
+        content += '            <option value="Import" selected>Import</option>';
+        content += '        </select>';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <input type="text" name="certification[]" class="form-control">';
+        content += '    </td>';
+        content += '    <td hidden>';
+        content += '       <input type="checkbox" name="sampleorreal[]" class="form-control">';
+        content += '    </td>';
+        content += '    <td hidden>';
+        content += '       <input type="text" name="price[]" class="form-control">';
+        content += '    </td>';
+        content += '    <td hidden>';
+        content += '       <input type="text" name="timeduration[]" class="form-control">';
+        content += '    </td>';
+        content += '    <td>';
+        content += '       <input type="text" name="origin[]" class="form-control">';
+        content += '    </td>';
+        content += '</tr>';
+        $('#items').append(content);
 
-    // console.log(contract_selected);
+        // console.log(contract_selected);
 
-    $('#qty_' + counter).on("keyup", function(){
-    var qty = $(this).val();
-    console.log(qty);
+        $('#qty_' + counter).on("keyup", function() {
+            var qty = $(this).val();
+            console.log(qty);
 
-        if(qty > 100){
-            $('#shipping_' + counter).val("By Sea");
-        }
-        else if(qty < 100){
-            $('#shipping_' + counter).val("By Air");
-        }
-    })
+            if (qty > 100) {
+                $('#shipping_' + counter).val("By Sea");
+            } else if (qty < 100) {
+                $('#shipping_' + counter).val("By Air");
+            }
+        })
 
-}
+        var name = $('#customername').val();
+        // console.log(name);
+        $('#customername_' + counter).val(name);
 
-function delField() {
-    $("#RequestItem_row_" + counter).remove();
-    counter--;
-}
+    }
+
+    function delField() {
+        $("#RequestItem_row_" + counter).remove();
+        counter--;
+    }
 </script>
 
 @endsection
