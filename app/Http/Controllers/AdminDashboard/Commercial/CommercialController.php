@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\AdminDashboard\Commercial;
 
+use App\Exports\CurrentRequestExport;
+use App\Exports\CurrentViewHistoryExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -25,6 +27,9 @@ use App\Models\SellerPlacedBidDetail;
 
 use App\Models\SalesMarketingOrder;
 use App\Models\CommercialOrder;
+use App\Models\LogisticOrder;
+use App\Models\OrderProcessingStages;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CommercialController extends Controller
 {
@@ -53,7 +58,7 @@ class CommercialController extends Controller
                         'customername' => $customer->comp_name_1,
                         'prod_name' => $product->name,
                         'prod_qty' => $detail->qty,
-                        'proceed' => $item->is_proceed,
+                        // 'proceed' => $item->is_proceed,
                         'date' => $item->created_at,
                     ];
                 }
@@ -64,6 +69,11 @@ class CommercialController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('flash_message_error', 'Something went wrong!');
         }
+    }
+
+    public function currentRequestExcelExport()
+    {
+        return Excel::download(new CurrentRequestExport, 'current-requests.xlsx');
     }
 
     public function currentViewDetail($id)
@@ -78,6 +88,97 @@ class CommercialController extends Controller
                 ->get();
 
             return view('admin-dashboard.commercial.current-viewdetail')->with(compact('data', 'requestid'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash_message_error', 'Something went wrong!');
+        }
+    }
+
+    public function currentViewHistory($id)
+    {
+        try {
+
+            $id = $id;
+            $requestid = BuyerMakeRequest::select('buyer_request_id')->where('id', $id)->first();
+
+            $detail = BuyerMakeRequestDetail::where('makerequest_id', $id)->first();
+            $product = BuyerListing::where('id', $detail->product_id)->first();
+
+            $data = SalesMarketingOrder::where('productname', $product->name)->get();
+
+            $dataArray = [];
+            foreach ($data as $item) {
+
+                $buyer = Buyer::where('id', $item->buyer_id)->first();
+                $seller = Seller::where('id', $item->seller_id)->first();
+
+                $dataArray[] = [
+                    'id' => $item->id,
+                    'buyer' => $buyer->comp_name_1,
+                    'seller' => $seller->comp_name_1,
+                    'name' => $item->productname,
+                    'qty' => $item->qty,
+                    'price' => $item->price,
+                ];
+            }
+
+            $buyers = Buyer::withTrashed()->get();
+
+            return view('admin-dashboard.commercial.current-viewhistory')->with(compact('id', 'requestid', 'dataArray', 'product', 'buyers'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash_message_error', 'Something went wrong!');
+        }
+    }
+
+    public function currentViewHistorySearch($prodName, $buyerId)
+    {
+        try {
+
+            $data = SalesMarketingOrder::where('productname', $prodName)->where('buyer_id', $buyerId)->get();
+
+            $dataArray = [];
+            foreach ($data as $item) {
+
+                $buyer = Buyer::where('id', $item->buyer_id)->first();
+                $seller = Seller::where('id', $item->seller_id)->first();
+
+                $dataArray[] = [
+                    'id' => $item->id,
+                    'buyer' => $buyer->comp_name_1,
+                    'seller' => $seller->comp_name_1,
+                    'name' => $item->productname,
+                    'qty' => $item->qty,
+                    'price' => $item->price,
+                ];
+            }
+
+            return response()->json(['data' => $dataArray]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash_message_error', 'Something went wrong!');
+        }
+    }
+
+    public function currentViewHistoryExcelExport($id)
+    {
+        return Excel::download(new CurrentViewHistoryExport($id), 'current-view-history.xlsx');
+    }
+
+    public function currentViewHistoryDetail($id)
+    {
+        try {
+
+            $data = SalesMarketingOrder::where('id', $id)->first();
+            $buyer = Buyer::where('id', $data->buyer_id)->first();
+            $seller = Seller::where('id', $data->seller_id)->first();
+
+            $commData = CommercialOrder::where('salemarketingorder_id', $data->id)->first();
+            $commbuyer = Buyer::where('id', $commData->buyer_id)->first();
+            $commseller = Seller::where('id', $commData->seller_id)->first();
+
+            $logData = LogisticOrder::where('commercialorder_id', $commData->id)->first();
+
+            $orderprocess = OrderProcessingStages::where('logisticorder_id', $logData->id)->first();
+
+            return view('admin-dashboard.commercial.current-viewhistory-detail')->with(compact('data', 'buyer', 'seller', 'commData', 'commbuyer', 'commseller', 'logData', 'orderprocess'));
         } catch (\Exception $e) {
             return redirect()->back()->with('flash_message_error', 'Something went wrong!');
         }

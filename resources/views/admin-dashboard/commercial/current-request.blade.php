@@ -17,7 +17,11 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <!-- <h4 class="card-title">Current Deals</h4> -->
+                    <div>
+                        <a href="{{ route('com-current-requests-excelexport') }}" class="btn text-white btn-rounded" style="background-color:#237549">
+                            <i class="mdi mdi-download menu-icon"></i> Excel Export
+                        </a>
+                    </div>
                     <div class="table-responsive d-block mt-4 pb-4">
                         <table class="table table-striped">
                             <thead>
@@ -44,29 +48,27 @@
                                     <td>{{ $item['prod_qty'] }}</td>
                                     <td>{{ date('d-M-Y', strtotime($item['date'])) }}</td>
                                     <td class="px-2">
-                                        <a href="{{ route('com-current-viewdetail', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#00CCCD">
+                                        <a href="{{ route('com-current-viewdetail', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#00CCCD">
                                             View Detail
                                         </a>
 
-                                        <a href="{{ route('com-current-requests-direct-quotation', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#232475">
+                                        <a href="{{ route('com-current-history', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#FFAB2D">
+                                            View History
+                                        </a>
+
+                                        <a href="{{ route('com-current-requests-direct-quotation', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#232475">
                                             Direct Quotation
                                         </a>
 
-                                        <a href="{{ route('com-current-requests-proceed', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#237549">
+                                        <a href="{{ route('com-current-requests-proceed', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#237549">
                                             Proceed
                                         </a>
 
-                                        <a hidden href="{{ route('com-current-requests-placebid', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#232475">
+                                        <a hidden href="{{ route('com-current-requests-placebid', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#232475">
                                             Place Bid
                                         </a>
 
-                                        <button class="btn text-white btn-rounded RejectButton" value="{{$item['id']}}"
-                                            data-toggle="modal" data-target="#rejectModal"
-                                            style="background-color:#F01111">
+                                        <button class="btn text-white btn-rounded RejectButton" value="{{$item['id']}}" data-toggle="modal" data-target="#rejectModal" style="background-color:#F01111">
                                             Reject
                                         </button>
                                     </td>
@@ -101,8 +103,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Note</label>
-                                <textarea name="note" class="form-control" rows="6"
-                                    placeholder="Type reason...."></textarea>
+                                <textarea name="note" class="form-control" rows="6" placeholder="Type reason...."></textarea>
                             </div>
                         </div>
                     </div>
@@ -122,12 +123,12 @@
 <!-- cdn jquery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-$('.RejectButton').on('click', function() { //use
-    var id = $(this).val();
-    // console.log(id);
-    $('#reject_requestid').val(id);
+    $('.RejectButton').on('click', function() { //use
+        var id = $(this).val();
+        // console.log(id);
+        $('#reject_requestid').val(id);
 
-})
+    })
 </script>
 
 @endsection

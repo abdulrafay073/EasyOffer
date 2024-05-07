@@ -27,8 +27,7 @@ use App\Http\Controllers\BuyerDashboard\Deals\BuyerDealsController;
 use App\Http\Controllers\BuyerDashboard\Listing\BuyerListingController;
 use App\Http\Controllers\BuyerDashboard\Profile\BuyerProfileController;
 use App\Http\Controllers\BuyerDashboard\MakeRequest\BuyerMakeRequestController;
-
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,12 +43,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function (){ return redirect('login'); });
+Route::get('/', function () {
+    return redirect('login');
+});
 // Route::get('/check-useremail/{email}', [RegisterController::class, 'checkUserEmail']);  //ajax call
 
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //Group Routes For Admin Dashboard
- 
+
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin-dashboard');
 
     // ******************************** General Module ******************************** 
@@ -73,7 +74,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     Route::post('/buyer-editSubmit', [GeneralController::class, 'buyerEditSubmit'])->name('buyer-editSubmit');
     Route::post('/buyer-rating', [GeneralController::class, 'buyerRating'])->name('buyer-rating');
     Route::post('/buyer-remove', [GeneralController::class, 'buyerRemove'])->name('buyer-remove');
-    
+
     // Buyer-Request Tab
     Route::get('/buyer-requests', [GeneralController::class, 'buyerRequests'])->name('buyer-requests');
     Route::post('/buyer-requests-accept', [GeneralController::class, 'buyerAccept'])->name('buyer-accept');
@@ -82,7 +83,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     // ******************************** Commercial Module ******************************** 
     // Current-Request Tab
     Route::get('/current-requests', [CommercialController::class, 'currentRequests'])->name('com-current-requests');
+    Route::get('/current-requests-excelexport', [CommercialController::class, 'currentRequestExcelExport'])->name('com-current-requests-excelexport');
     Route::get('/current-viewdetail/{id}', [CommercialController::class, 'currentViewDetail'])->name('com-current-viewdetail');
+    Route::get('/current-viewhistory/{id}', [CommercialController::class, 'currentViewHistory'])->name('com-current-history');
+    Route::get('/current-viewhistorysearch/{pname}/{buyerid}', [CommercialController::class, 'currentViewHistorySearch']);
+    Route::get('/current-viewhistory-excelexport/{id}', [CommercialController::class, 'currentViewHistoryExcelExport'])->name('com-current-viewhistory-excelexport');
+    Route::get('/current-viewhistorydetail/{id}', [CommercialController::class, 'currentViewHistoryDetail'])->name('com-current-viewhistorydetail');
     Route::get('/com-current-requests-direct-quotation/{id}', [CommercialController::class, 'currentRequestsDirectQuotation'])->name('com-current-requests-direct-quotation');
     Route::post('/com-current-requests-direct-quotation-proceed', [CommercialController::class, 'currentRequestsDirectQuotationSubmit'])->name('com-current-requests-direct-quotation-proceed');
 
@@ -143,7 +149,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     Route::get('/completed-deals', [OrderProcessingController::class, 'completedDeals'])->name('completed-deals');
     Route::get('/completed-deal-viewdetail/{id}', [OrderProcessingController::class, 'completedDealViewDetail'])->name('completed-deals-viewdetail');
 
-    
+
     // ******************************** Finance Module ******************************** 
     // Finance-Dashboard Tab
     Route::get('/finance', [FinanceController::class, 'financeDdashboard'])->name('finance-dashboard');
@@ -156,7 +162,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     // Receivables Tab
     Route::get('/receivables', [FinanceController::class, 'receivables'])->name('receivables');
     Route::post('/submit-receivables', [FinanceController::class, 'submitReceivables'])->name('submit-receivables');
-    
+
     // Expenses Tab
     Route::get('/expenses', [FinanceController::class, 'expenses'])->name('expenses');
     Route::post('/submit-expenses', [FinanceController::class, 'submitExpenses'])->name('submit-expenses');
@@ -180,7 +186,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
 
     // InProcess Request Tab
     Route::get('/sale-inprocess-request', [SalesAndMarketingController::class, 'saleInProcessRequest'])->name('sale-inprocess-request');
-    
+
     // Request Detail Tab
     Route::get('/sale-request-detail', [SalesAndMarketingController::class, 'saleRequestDetail'])->name('sale-request-detail');
 
@@ -197,7 +203,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     // Previous Email Tab
     Route::get('/sale-previous-email', [SalesAndMarketingController::class, 'salePreviousEmail'])->name('sale-previous-email');
 
-    
+
     // ******************************** Logistics Module ******************************** 
     // Logistics Tab
     Route::get('/logistic-orders', [LogisticsController::class, 'logisticOrders'])->name('logistics-orders');
@@ -225,12 +231,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     // ******************************** Notification Module ******************************** 
     //Notification Tab
     Route::get('/notification', [NotificationController::class, 'notification'])->name('admin-notification');
-
 });
 
 
 Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () {   //Group Routes For Buyer Dashboard
-    
+
     Route::get('/dashboard', [BuyerDashboardController::class, 'index'])->name('buyer-dashboard');
 
     // ******************************** Deals Module ******************************** 
@@ -243,7 +248,7 @@ Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () { 
     Route::post('/material-confirmation', [BuyerDealsController::class, 'materialConfirmation'])->name('material-confirmation');
     Route::post('/margin-received', [BuyerDealsController::class, 'marginReceived'])->name('margin-received');
     Route::post('/feedback', [BuyerDealsController::class, 'feedback'])->name('feedback');
-    
+
     // Current Request Tab
     Route::get('/current-requests', [BuyerDealsController::class, 'currentRequests'])->name('current-requests');
     Route::get('/current-viewdetail/{id}', [BuyerDealsController::class, 'currentViewDetail'])->name('current-viewdetails');
@@ -252,7 +257,7 @@ Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () { 
     Route::post('/current-bid-accept', [BuyerDealsController::class, 'currentBidAccept'])->name('current-bid-accepts');
     Route::post('/current-bid-rebid', [BuyerDealsController::class, 'currentBidReBid'])->name('current-bid-rebids');
     Route::post('/current-bid-reject', [BuyerDealsController::class, 'currentBidReject'])->name('current-bid-rejects');
-    
+
     // Pending Request Tab
     Route::get('/pending-requests', [BuyerDealsController::class, 'pendingRequests'])->name('pending-requests');
     Route::get('/pending-viewdetail/{id}', [BuyerDealsController::class, 'pendingViewDetail'])->name('pending-viewdetails');
@@ -263,12 +268,12 @@ Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () { 
     Route::get('/rejected-viewdetail/{id}', [BuyerDealsController::class, 'rejectedViewDetail'])->name('rejected-viewdetails');
     Route::get('/rejected-re-request/{id}', [BuyerDealsController::class, 'rejectedReRequest'])->name('rejected-re-requests');
     Route::post('/rejected-re-request-submit', [BuyerDealsController::class, 'rejectedReRequestSubmit'])->name('rejected-re-requests-submit');
-    
+
     // ******************************** Make Request Module ******************************** 
     Route::get('/make-request', [BuyerMakeRequestController::class, 'index']);
     Route::post('/make-request', [BuyerMakeRequestController::class, 'createRequest'])->name('create-request');
 
-    
+
     // ******************************** Listing Module ******************************** 
     Route::get('/create-listing', [BuyerListingController::class, 'index']);
     Route::post('/create-listing', [BuyerListingController::class, 'createListing'])->name('create-listings');
@@ -276,8 +281,8 @@ Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () { 
     Route::get('/update-listing/{id}', [BuyerListingController::class, 'getListingData'])->name('update-listings');
     Route::post('/update-listing', [BuyerListingController::class, 'updateListing'])->name('submit-editlistings');
     Route::get('/delete-listing/{id}', [BuyerListingController::class, 'getListingDataDel'])->name('delete-listings');
-    Route::post('/delete-listing', [BuyerListingController  ::class, 'deleteListing'])->name('submit-dellistings');
-    Route::post('/excel-listing', [BuyerListingController  ::class, 'excelListing'])->name('excel-listings');
+    Route::post('/delete-listing', [BuyerListingController::class, 'deleteListing'])->name('submit-dellistings');
+    Route::post('/excel-listing', [BuyerListingController::class, 'excelListing'])->name('excel-listings');
 
     Route::get('/notification', [BuyerDashboardController::class, 'notification'])->name('notifications');
 
@@ -285,7 +290,7 @@ Route::group(['middleware' => ['is_buyer'], 'prefix' => 'buyer'], function () { 
     Route::get('/update-profile', [BuyerProfileController::class, 'index']);
     Route::post('/update-profile', [BuyerProfileController::class, 'updateProfile'])->name('update-profiles');
     Route::get('/check-password/{password}', [BuyerProfileController::class, 'checkUserPassword']);  //ajax call
-    
+
 });
 
 
@@ -294,13 +299,13 @@ Route::group(['middleware' => ['is_seller'], 'prefix' => 'seller'], function () 
     Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('seller-dashboard');
 
     // ******************************** Deals Module ******************************** 
-     // Current Deals Tab
+    // Current Deals Tab
     Route::get('/current-deals', [SellerDealsController::class, 'currentDeals'])->name('current-deal');
     Route::get('/current-deal-viewdetail/{id}', [SellerDealsController::class, 'currentDealViewDetail'])->name('current-deals-viewdetail');
     Route::post('/purchase-confirm', [SellerDealsController::class, 'purchaseConfirm'])->name('purchase-confirm');
     Route::post('/purchase-cancel', [SellerDealsController::class, 'purchaseCancel'])->name('purchase-cancel');
     Route::post('/shipment-docs', [SellerDealsController::class, 'shipmentDocs'])->name('shipment-docs');
-    
+
     // Current Requests Tab
     Route::get('/current-requests', [SellerDealsController::class, 'currentRequests'])->name('current-request');
     Route::get('/current-viewdetail/{id}', [SellerDealsController::class, 'currentViewDetail'])->name('current-viewdetail');
@@ -308,12 +313,12 @@ Route::group(['middleware' => ['is_seller'], 'prefix' => 'seller'], function () 
     Route::post('/current-placedbid-submit', [SellerDealsController::class, 'currentRequestSubmit'])->name('current-requests-submit');
     Route::post('/current-requests-reject', [SellerDealsController::class, 'currentRequestReject'])->name('current-requests-reject');
 
-    
+
     // ******************************** Bids Module ******************************** 
     //not use
     Route::get('/make-bids', [SellerDashboardController::class, 'createBid'])->name('create-bid');     //not use
     Route::get('/placed-bids', [SellerDashboardController::class, 'placedBids'])->name('placed-bids'); //not use
-    
+
     // Pending Bids Tab
     Route::get('/pending-bids', [SellerBidsController::class, 'pendingBids'])->name('pending-bid');
     Route::get('/pending-bids-detail/{id}', [SellerBidsController::class, 'pendingBidDetail'])->name('pending-bid-detail');
@@ -323,8 +328,8 @@ Route::group(['middleware' => ['is_seller'], 'prefix' => 'seller'], function () 
     Route::get('/current-bids', [SellerBidsController::class, 'currentBids'])->name('current-bid');
     Route::get('/current-bids-detail/{id}', [SellerBidsController::class, 'currentBidDetail'])->name('current-bid-detail');
     Route::get('/current-bids-response/{id}', [SellerBidsController::class, 'currentBidResponse']);  //ajax call
-    
-    
+
+
     // ******************************** Listing Module ******************************** 
     Route::get('/create-listing', [SellerListingController::class, 'index']);
     Route::post('/create-listing', [SellerListingController::class, 'createListing'])->name('create-listing');
@@ -333,11 +338,11 @@ Route::group(['middleware' => ['is_seller'], 'prefix' => 'seller'], function () 
     Route::post('/update-listing', [SellerListingController::class, 'updateListing'])->name('submit-editlisting');
     Route::get('/delete-listing/{id}', [SellerListingController::class, 'getListingDataDel'])->name('delete-listing');
     Route::post('/delete-listing', [SellerListingController::class, 'deleteListing'])->name('submit-dellisting');
-    Route::post('/excel-listing', [SellerListingController  ::class, 'excelListing'])->name('excel-listing');
+    Route::post('/excel-listing', [SellerListingController::class, 'excelListing'])->name('excel-listing');
 
     Route::get('/notification', [SellerDashboardController::class, 'notification'])->name('notification');
 
-    
+
     // ******************************** Profile Module ******************************** 
     Route::get('/update-profile', [SellerProfileController::class, 'index']);
     Route::post('/update-profile', [SellerProfileController::class, 'updateProfile'])->name('update-profile');
