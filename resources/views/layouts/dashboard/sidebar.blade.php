@@ -352,7 +352,7 @@
                              <a class="nav-link" href="{{ route('sale-quotation-request') }}">Quotation Requests</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="{{ route('sale-listing') }}">Listing</a>
+                             <a class="nav-link" href="{{ route('sale-priority-product-list') }}">Priority Product List</a>
                          </li>
                          <li class="nav-item">
                              <a class="nav-link" href="{{ route('sale-inprocess-request') }}">InProcess Requests</a>
@@ -385,6 +385,46 @@
                      <ul class="nav flex-column sub-menu">
                          <li class="nav-item">
                              <a class="nav-link" href="{{ route('logistics-orders') }}">Order Confirmation Form</a>
+                         </li>
+                     </ul>
+                 </div>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" data-toggle="collapse" href="#ui-matter" aria-expanded="false" aria-controls="ui-basic">
+                     <i class="mdi mdi-hexagon-multiple menu-icon"></i>
+                     <span class="menu-title">Important Matter</span>
+                     <i class="menu-arrow"></i>
+                 </a>
+                 <div class="collapse" id="ui-matter">
+                     <ul class="nav flex-column sub-menu">
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('new-matter') }}">New Matter</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('matters') }}">View Matters</a>
+                         </li>
+                     </ul>
+                 </div>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" data-toggle="collapse" href="#ui-order" aria-expanded="false" aria-controls="ui-basic">
+                     <i class="mdi mdi-checkbox-marked-circle menu-icon"></i>
+                     <span class="menu-title">Order Possibility</span>
+                     <i class="menu-arrow"></i>
+                 </a>
+                 <div class="collapse" id="ui-order">
+                     <ul class="nav flex-column sub-menu">
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('order-buyer-by-inquiry') }}">Buyer by Inquiry</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('order-buyer-by-order') }}">Buyer by Order</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('order-seller-by-order') }}">Seller By Order</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ route('order-product-by-inquiry') }}">Product By Inquiry</a>
                          </li>
                      </ul>
                  </div>

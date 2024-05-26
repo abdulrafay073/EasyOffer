@@ -44,12 +44,10 @@
                                     <td>{{ $item['prod_qty'] }}</td>
                                     <td>{{ date('d-M-Y', strtotime($item['date'])) }}</td>
                                     <td class="px-2">
-                                        <a href="{{ route('inprocess-viewdetail', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#00CCCD">
+                                        <a href="{{ route('inprocess-viewdetail', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#00CCCD">
                                             View Detail
                                         </a>
-                                        <a href="{{ route('inprocess-viewbid', $item['id']) }}"
-                                            class="btn text-white btn-rounded" style="background-color:#232475">
+                                        <a href="{{ route('inprocess-viewbid', $item['id']) }}" class="btn text-white btn-rounded" style="background-color:#232475">
                                             View Quotation
                                         </a>
                                     </td>

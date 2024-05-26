@@ -24,8 +24,9 @@
                                 <tr style="background-color: #CFCED1">
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Certifications</th>
                                     <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Certifications</th>
                                     <th>Capacity</th>
                                     <th>Intermediate Manufacturing</th>
                                     <th>Action</th>
@@ -37,8 +38,9 @@
                                 <tr>
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $item['name'] }}</td>
-                                    <td>{{ $item['certification'] }}</td>
                                     <td>{{ $item['description'] }}</td>
+                                    <td>{{ number_format($item['price'], 2) }}</td>
+                                    <td>{{ $item['certification'] }}</td>
                                     <td>{{ $item['capacity'] }}</td>
                                     <td>
                                         @if($item['intermediate_manufacturing'] == 1)
@@ -49,14 +51,12 @@
                                     </td>
                                     <td class="px-2">
                                         <button class="btn btn-rounded" style="background-color:#232475">
-                                            <a href="{{ route('update-listing', $item['id']) }}"
-                                                style="color:#fff; text-decoration:none">
+                                            <a href="{{ route('update-listing', $item['id']) }}" style="color:#fff; text-decoration:none">
                                                 Update
                                             </a>
                                         </button>
                                         <button class="btn text-white btn-rounded" style="background-color:#F01111">
-                                            <a href="{{ route('delete-listing', $item['id']) }}"
-                                                style="color:#fff; text-decoration:none">
+                                            <a href="{{ route('delete-listing', $item['id']) }}" style="color:#fff; text-decoration:none">
                                                 Delete
                                             </a>
                                         </button>

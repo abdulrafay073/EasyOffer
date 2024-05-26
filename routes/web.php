@@ -9,11 +9,12 @@ use App\Http\Controllers\AdminDashboard\General\GeneralController;
 use App\Http\Controllers\AdminDashboard\Commercial\CommercialController;
 use App\Http\Controllers\AdminDashboard\OrderProcessing\OrderProcessingController;
 use App\Http\Controllers\AdminDashboard\Finance\FinanceController;
+use App\Http\Controllers\AdminDashboard\ImportantMatter\MatterController;
 use App\Http\Controllers\AdminDashboard\SalesAndMarketing\SalesAndMarketingController;
 use App\Http\Controllers\AdminDashboard\Logistics\LogisticsController;
 use App\Http\Controllers\AdminDashboard\SystemSetting\SystemSettingController;
 use App\Http\Controllers\AdminDashboard\Notification\NotificationController;
-
+use App\Http\Controllers\AdminDashboard\OrderPossibility\OrderPossibilityController;
 //Seller
 use App\Http\Controllers\SellerDashboard\SellerDashboardController;
 use App\Http\Controllers\SellerDashboard\Deals\SellerDealsController;
@@ -182,7 +183,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     Route::get('/sale-quotation-viewbids/{id}', [SalesAndMarketingController::class, 'saleQuotationViewBid'])->name('sale-quotation-viewbids');
 
     // Listing Tab
-    Route::get('/sale-listing', [SalesAndMarketingController::class, 'saleListing'])->name('sale-listing');
+    Route::get('/sale-priority-product-list', [SalesAndMarketingController::class, 'salePriorityProductList'])->name('sale-priority-product-list');
+    Route::get('/sale-priority-product-search', [SalesAndMarketingController::class, 'salePriorityProductSearch'])->name('sale-priority-product-search');
 
     // InProcess Request Tab
     Route::get('/sale-inprocess-request', [SalesAndMarketingController::class, 'saleInProcessRequest'])->name('sale-inprocess-request');
@@ -210,6 +212,22 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     Route::get('/logistic-order-viewdetails/{id}', [LogisticsController::class, 'orderViewDetails'])->name('logistics-order-viewdetails');
     Route::post('/logistic-order-confirmation', [LogisticsController::class, 'logisticOrderSubmit'])->name('logistics-order-confirmation-submit');
 
+
+    // ******************************** Important Matter Module ******************************** 
+    Route::get('/new-matter', [MatterController::class, 'index'])->name('new-matter');
+    Route::post('/create-matter', [MatterController::class, 'createMatter'])->name('create-matter');
+    Route::get('/matters', [MatterController::class, 'getMatterListing'])->name('matters');
+    Route::get('/update-matter/{id}', [MatterController::class, 'getMatterData'])->name('update-matter');
+    Route::post('/update-matter', [MatterController::class, 'updateMatter'])->name('submit-update-matter');
+    Route::get('/delete-matter/{id}', [MatterController::class, 'getMatterDataDel'])->name('delete-matter');
+    Route::post('/delete-matter', [MatterController::class, 'deleteMatter'])->name('submit-delete-matter');
+
+
+    // ******************************** Order Possibility Module ******************************** 
+    Route::get('/order-buyer-by-inquiry', [OrderPossibilityController::class, 'orderPossibilityBuyerByInquiry'])->name('order-buyer-by-inquiry');
+    Route::get('/order-buyer-by-order', [OrderPossibilityController::class, 'orderPossibilityBuyerByOrder'])->name('order-buyer-by-order');
+    Route::get('/order-seller-by-order', [OrderPossibilityController::class, 'orderPossibilitySellerByOrder'])->name('order-seller-by-order');
+    Route::get('/order-product-by-inquiry', [OrderPossibilityController::class, 'orderPossibilityProductByInquiry'])->name('order-product-by-inquiry');
 
     // ******************************** System Settings Module ******************************** 
     // Terms And Conditions Tab

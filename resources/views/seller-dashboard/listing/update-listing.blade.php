@@ -20,33 +20,33 @@
                     <!-- <h4 class="card-title">Update Listing</h4> -->
                     <!-- <p class="card-description">Basic form layout</p> -->
 
-                    <form action="{{ route('submit-editlisting') }}" method="POST" enctype='multipart/form-data'
-                        class="forms-sample">
+                    <form action="{{ route('submit-editlisting') }}" method="POST" enctype='multipart/form-data' class="forms-sample">
                         @csrf
 
                         <input type="hidden" name="listingid" value="{{$data['id']}}" class="form-control">
                         <div class="col-md-6">
                             <label class="text-bold">Name</label>
-                            <input type="text" name="editname" class="form-control" value="{{ $data['name'] }}"
-                                placeholder="Name">
+                            <input type="text" name="editname" class="form-control" value="{{ $data['name'] }}" placeholder="Name">
                         </div>
 
                         <div class="col-md-6 mt-3">
                             <label class="text-bold">Description</label>
-                            <textarea type="text" name="editdescription" rows="6" class="form-control"
-                                placeholder="Description">{{ $data['description'] }}</textarea>
+                            <textarea type="text" name="editdescription" rows="6" class="form-control" placeholder="Description">{{ $data['description'] }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mt-3">
+                            <label class="text-bold">Price</label>
+                            <input type="number" min=0 step="0.1" name="editprice" class="form-control" value="{{ $data['price'] }}">
                         </div>
 
                         <div class="col-md-6 mt-3">
                             <label class="text-bold">Certification</label>
-                            <input type="text" name="editcertification" class="form-control"
-                                value="{{ $data['certification'] }}" placeholder="Name">
+                            <input type="text" name="editcertification" class="form-control" value="{{ $data['certification'] }}" placeholder="Name">
                         </div>
 
                         <div class="col-md-6 mt-3">
                             <label class="text-bold">Capacity</label>
-                            <input type="text" name="editcapacity" class="form-control" value="{{ $data['capacity'] }}"
-                                placeholder="capacity">
+                            <input type="text" name="editcapacity" class="form-control" value="{{ $data['capacity'] }}" placeholder="capacity">
                         </div>
 
                         <div class="col-md-6 mt-3">
@@ -56,22 +56,18 @@
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             @if($data['intermediate_manufacturing'] == 1)
-                                            <input type="radio" class="form-check-input" name="editoptionsRadios"
-                                                id="optionsRadiosBuyer" value="1" checked> Yes
+                                            <input type="radio" class="form-check-input" name="editoptionsRadios" id="optionsRadiosBuyer" value="1" checked> Yes
                                             @else
-                                            <input type="radio" class="form-check-input" name="editoptionsRadios"
-                                                id="optionsRadiosBuyer" value="1"> Yes
+                                            <input type="radio" class="form-check-input" name="editoptionsRadios" id="optionsRadiosBuyer" value="1"> Yes
                                             @endif
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             @if($data['intermediate_manufacturing'] == 0)
-                                            <input type="radio" class="form-check-input" name="editoptionsRadios"
-                                                id="optionsRadiosBuyer" value="0" checked> No
+                                            <input type="radio" class="form-check-input" name="editoptionsRadios" id="optionsRadiosBuyer" value="0" checked> No
                                             @else
-                                            <input type="radio" class="form-check-input" name="editoptionsRadios"
-                                                id="optionsRadiosBuyer" value="0"> No
+                                            <input type="radio" class="form-check-input" name="editoptionsRadios" id="optionsRadiosBuyer" value="0"> No
                                             @endif
                                     </div>
                                 </div>
@@ -86,8 +82,7 @@
                         </div>
 
                         <div class="col-md-12 mt-4 pb-4">
-                            <button type="submit" class="btn text-white btn-rounded mr-2"
-                                style="background-color:#232475"> Update
+                            <button type="submit" class="btn text-white btn-rounded mr-2" style="background-color:#232475"> Update
                             </button>
                             <button class="btn btn-light btn-rounded">
                                 <a href="{{ route('listings') }}" style="color:#000; text-decoration:none">Back</a>

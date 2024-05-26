@@ -14,6 +14,7 @@ class SellerListing extends Model
         'user_id',
         'name',
         'description',
+        'price',
         'certification',
         'capacity',
         'intermediate_manufacturing',

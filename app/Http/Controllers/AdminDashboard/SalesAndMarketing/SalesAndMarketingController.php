@@ -22,6 +22,7 @@ use App\Models\SellerPlacedBidDetail;
 
 
 use App\Models\SalesMarketingOrder;
+use App\Models\SellerListing;
 
 class SalesAndMarketingController extends Controller
 {
@@ -250,10 +251,72 @@ class SalesAndMarketingController extends Controller
         }
     }
 
-    public function saleListing()
+    public function salePriorityProductList()
     {
         try {
-            return view('admin-dashboard.salesandmarketing.listing');
+
+            $data = SellerListing::where('is_active', 1)->orderBy('id', 'ASC')->get();
+
+            $dataArray = [];
+            foreach ($data as $item) {
+
+                $seller = User::where('id', $item->user_id)->first();
+
+                $dataArray[] = [
+                    'seller_name' => $seller->name,
+                    'name' => $item->name,
+                    'description' => $item->description,
+                    'price' => $item->price,
+                    'certification' => $item->certification,
+                    'capacity' => $item->capacity,
+                    'intermediate_manufacturing' => $item->intermediate_manufacturing,
+                ];
+            }
+
+            $sellers = User::where('role_id', 3)->get();
+
+            return view('admin-dashboard.salesandmarketing.priority-product-listing')->with(compact('dataArray', 'sellers', 'data'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash_message_error', 'Something went wrong!');
+        }
+    }
+
+    public function salePriorityProductSearch(Request $request)
+    {
+        try {
+
+            $baseQuery = SellerListing::withoutTrashed();
+
+            if ($request->has('pname')) {
+                $baseQuery = $baseQuery->where('name', $request->pname);
+            }
+
+            if ($request->has('sellerid')) {
+                $baseQuery = $baseQuery->where('user_id', $request->sellerid);
+            }
+
+            $data = $baseQuery->get();
+
+            $dataArray = [];
+            foreach ($data as $item) {
+
+                $seller = User::where('id', $item->user_id)->first();
+
+                $dataArray[] = [
+                    'seller_name' => $seller->name,
+                    'name' => $item->name,
+                    'description' => $item->description,
+                    'price' => $item->price,
+                    'certification' => $item->certification,
+                    'capacity' => $item->capacity,
+                    'intermediate_manufacturing' => $item->intermediate_manufacturing,
+                ];
+            }
+
+            $data = SellerListing::where('is_active', 1)->orderBy('id', 'ASC')->get();
+            $sellers = User::where('role_id', 3)->get();
+
+            return view('admin-dashboard.salesandmarketing.priority-product-listing')->with(compact('dataArray', 'data', 'sellers'));
         } catch (\Exception $e) {
             return redirect()->back()->with('flash_message_error', 'Something went wrong!');
         }

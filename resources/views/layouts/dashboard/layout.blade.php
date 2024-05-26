@@ -892,6 +892,45 @@
     </script>
     @endif
 
+    @if (session('creatematter'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // console.log("dddssd");
+            Swal.fire(
+                'Success!',
+                'Matter has been created successfully',
+                'success',
+            )
+        })
+    </script>
+    @endif
+
+    @if (session('updatematter'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // console.log("dddssd");
+            Swal.fire(
+                'Success!',
+                'Matter has been updated successfully',
+                'success',
+            )
+        })
+    </script>
+    @endif
+
+    @if (session('deletematter'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // console.log("dddssd");
+            Swal.fire(
+                'Success!',
+                'Matter has been deleted successfully',
+                'success',
+            )
+        })
+    </script>
+    @endif
+
     <!-- *** Success Swal Popup End *** -->
 
 </body>
