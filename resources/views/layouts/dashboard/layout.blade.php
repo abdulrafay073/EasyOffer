@@ -931,6 +931,19 @@
     </script>
     @endif
 
+    @if (session('requotationrequest'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // console.log("dddssd");
+            Swal.fire(
+                'Success!',
+                'Request for requotation has been send successfully',
+                'success',
+            )
+        })
+    </script>
+    @endif
+
     <!-- *** Success Swal Popup End *** -->
 
 </body>

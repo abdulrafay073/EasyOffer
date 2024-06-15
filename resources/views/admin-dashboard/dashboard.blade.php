@@ -85,14 +85,12 @@
                     <div class="row">
                         <div class="col-sm-7">
                             <h5>Business Survey</h5>
-                            <p class="text-muted"> Show overview jan 2018 - Dec 2019 <a
-                                    class="text-muted font-weight-medium pl-2" href="#"><u>See
+                            <p class="text-muted"> Show overview jan 2018 - Dec 2019 <a class="text-muted font-weight-medium pl-2" href="#"><u>See
                                         Details</u></a>
                             </p>
                         </div>
                         <div class="col-sm-5 text-md-right">
-                            <button type="button"
-                                class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal">
+                            <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal">
                                 <i class="mdi mdi-email btn-icon-prepend"></i>Download Report </button>
                         </div>
                     </div>
@@ -301,8 +299,7 @@
                             <h5 class="mb-0">$459/mo</h5>
                         </div>
                     </div>
-                    <a class="text-black mt-3 d-block font-weight-medium h6" href="#">View all <i
-                            class="mdi mdi-chevron-right"></i></a>
+                    <a class="text-black mt-3 d-block font-weight-medium h6" href="#">View all <i class="mdi mdi-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -558,8 +555,7 @@
                         <span class="d-flex justify-content-between">
                             <span>Activity</span>
                             <span class="dropdown dropleft d-block">
-                                <span id="dropdownMenuButton1" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                    aria-expanded="false">
+                                <span id="dropdownMenuButton1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span><i class="mdi mdi-dots-horizontal"></i></span>
                                 </span>
                                 <span class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -597,8 +593,7 @@
                             <p class="text-muted">2h ago</p>
                         </li>
                     </ul>
-                    <a class="text-black mt-3 mb-0 d-block h6" href="#">View all <i
-                            class="mdi mdi-chevron-right"></i></a>
+                    <a class="text-black mt-3 mb-0 d-block h6" href="#">View all <i class="mdi mdi-chevron-right"></i></a>
                 </div>
             </div>
             <!--activity ends-->
@@ -628,8 +623,7 @@
                                         <i class="mdi mdi-reload"></i>
                                     </div>
                                     <div class="dropdown dropleft pl-1 pt-3">
-                                        <div id="dropdownMenuButton2" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <div id="dropdownMenuButton2" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <p><i class="mdi mdi-dots-vertical"></i></p>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -661,8 +655,7 @@
                                         <i class="mdi mdi-reload"></i>
                                     </div>
                                     <div class="dropdown dropleft pl-1 pt-3">
-                                        <div id="dropdownMenuButton3" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <div id="dropdownMenuButton3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <p><i class="mdi mdi-dots-vertical"></i></p>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
@@ -694,8 +687,7 @@
                                         <i class="mdi mdi-reload"></i>
                                     </div>
                                     <div class="dropdown dropleft pl-1 pt-3">
-                                        <div id="dropdownMenuButton4" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <div id="dropdownMenuButton4" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <p><i class="mdi mdi-dots-vertical"></i></p>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
@@ -727,8 +719,7 @@
                                         <i class="mdi mdi-reload"></i>
                                     </div>
                                     <div class="dropdown dropleft pl-1 pt-3">
-                                        <div id="dropdownMenuButton5" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <div id="dropdownMenuButton5" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <p><i class="mdi mdi-dots-vertical"></i></p>
                                         </div>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
@@ -795,8 +786,7 @@
                         <div class="col-sm-12">
                             <div class="d-flex justify-content-between pb-3 border-bottom">
                                 <div>
-                                    <img class="mr-2" src="{{ asset('images/browser-logo/firefox-logo.png') }}"
-                                        alt="" />
+                                    <img class="mr-2" src="{{ asset('images/browser-logo/firefox-logo.png') }}" alt="" />
                                     <span class="p">Firefox</span>
                                 </div>
                                 <p class="mb-0">17%</p>
@@ -807,8 +797,7 @@
                         <div class="col-sm-12">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <img class="mr-2" src="{{ asset('images/browser-logo/explorer-logo.png') }}"
-                                        alt="" />
+                                    <img class="mr-2" src="{{ asset('images/browser-logo/explorer-logo.png') }}" alt="" />
                                     <span class="p">Explorer</span>
                                 </div>
                                 <p class="mb-0">05%</p>
@@ -833,6 +822,78 @@
         </nav>
     </div>
     <div class="row">
+        <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+            <div class="card bg-warning">
+                <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="color-card">
+                            <p class="mb-0 color-card-head">Inquiries</p>
+                            <!-- <h2 class="text-white"> $8,753.<span class="h5">00</span></h2> -->
+                        </div>
+                        <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"></i>
+                    </div>
+                    <h2 class="text-white">7</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+            <div class="card bg-danger">
+                <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="color-card">
+                            <p class="mb-0 color-card-head">Quotation</p>
+                            <!-- <h2 class="text-white"> $5,300.<span class="h5">00</span></h2> -->
+                        </div>
+                        <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                    </div>
+                    <h2 class="text-white">4</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+            <div class="card bg-primary">
+                <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="color-card">
+                            <p class="mb-0 color-card-head">Quotation Action Response</p>
+                            <!-- <h2 class="text-white"> $1,753.<span class="h5">00</span></h2> -->
+                        </div>
+                        <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                    </div>
+                    <h2 class="text-white">3</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+            <div class="card bg-success">
+                <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="color-card">
+                            <p class="mb-0 color-card-head">Total Bids</p>
+                            <!-- <h2 class="text-white">2368</h2> -->
+                        </div>
+                        <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
+                    </div>
+                    <h2 class="text-white">2</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+            <div class="card bg-info">
+                <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="color-card">
+                            <p class="mb-0 color-card-head">Important Issue</p>
+                            <!-- <h2 class="text-white">2368</h2> -->
+                        </div>
+                        <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
+                    </div>
+                    <h2 class="text-white">12</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" hidden>
         <div class="col-lg-4 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -883,7 +944,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" hidden>
         <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">

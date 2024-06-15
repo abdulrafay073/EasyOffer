@@ -129,6 +129,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {   //
     //Quotation Response Tab
     Route::get('/quotations-response', [CommercialController::class, 'getQuotationResponse'])->name('quotations-response');
     Route::get('/quotation-response-viewdetail/{id}', [CommercialController::class, 'quotationResponseViewDetail'])->name('quotation-response-viewdetail');
+    Route::post('/requotation-request-to-seller', [CommercialController::class, 'requotationRequestToSeller'])->name('requotation-request-to-seller');
 
     // Order-Confirmation Tab
     Route::get('/order-confirmation-list', [CommercialController::class, 'index'])->name('order-confirmation-list');

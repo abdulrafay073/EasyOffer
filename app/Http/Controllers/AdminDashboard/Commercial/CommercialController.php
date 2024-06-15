@@ -790,12 +790,12 @@ class CommercialController extends Controller
             $dataArray = [];
             foreach ($getids as $item) {
 
-                $data = SellerPlacedBid::where('placedbid_against_makerequest_id', $item->id)->where('is_proceed', 1)->where('admin_margin', '!=', "")->where('admin_forward_quot_to_buyer', 0)->first();
+                $data = SellerPlacedBid::withoutTrashed()->where('placedbid_against_makerequest_id', $item->id)->where('is_proceed', 1)->where('admin_margin', '!=', "")->where('admin_forward_quot_to_buyer', 0)->first();
 
                 if ($data != "") {
 
                     $seller = Seller::where('id', $data->seller_id)->first();
-                    $detail = SellerPlacedBidDetail::where('placedbid_id', $item->id)->first();
+                    $detail = SellerPlacedBidDetail::where('placedbid_id', $data->id)->first();
                     $product = BuyerListing::where('id', $detail->product_id)->first();
 
                     $dataArray[] = [
@@ -883,12 +883,14 @@ class CommercialController extends Controller
                 if ($data != "") {
 
                     $seller = Seller::where('id', $data->seller_id)->first();
-                    $detail = SellerPlacedBidDetail::where('placedbid_id', $item->id)->first();
+                    $detail = SellerPlacedBidDetail::where('placedbid_id', $data->id)->first();
                     $product = BuyerListing::where('id', $detail->product_id)->first();
 
                     $dataArray[] = [
                         'id' => $data->id,
+                        'placedbid_against_makerequest_id' => $data->placedbid_against_makerequest_id,
                         'buyer_reqId' => $data->buyer_request_id,
+                        'sellerid' => $seller->id,
                         'sellername' => $seller->comp_name_1,
                         'customername' => $detail->customer_name,  //buyername
                         'prod_name' => $product->name,
@@ -906,6 +908,23 @@ class CommercialController extends Controller
 
             return view('admin-dashboard.commercial.quotation-response-viewdetail')->with(compact('dataArray', 'getreqid'));
         } catch (\Exception $e) {
+            return redirect()->back()->with('flash_message_error', 'Something went wrong!');
+        }
+    }
+
+    public function requotationRequestToSeller(Request $request)
+    {
+        try {
+            $bid = SellerPlacedBid::where('id', $request->placebid_id)->where('seller_id', $request->seller_id)->delete();  //delete
+
+            $seller = Seller::where('id', $request->seller_id)->first();
+            $bmr_proceed = BmrProceed::where('buyer_make_request_id', $request->placedbid_against_makerequest_id)->where('seller_id', $seller->user_id)->first();
+            $bmr_proceed->is_placedbid_by_seller = 0;
+            $bmr_proceed->save();
+
+            return redirect('admin/quotations-response')->with('requotationrequest', 'Requotation request has been send successfully !');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('flash_message_error', 'Something went wrong!');
         }
     }

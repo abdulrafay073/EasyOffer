@@ -18,7 +18,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                <h4 class="card-title">Request ID # {{ $getreqid->request_id }}</h4>
+                    <h4 class="card-title">Request ID # {{ $getreqid->request_id }}</h4>
 
                     <div class="table-responsive d-block mt-4 pb-4">
                         <table class="table table-striped">
@@ -32,6 +32,7 @@
                                     <th>Qty</th>
                                     <th>Price</th>
                                     <th>Date</th>
+                                    <th>Buyer Feedback</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -50,19 +51,33 @@
                                     <td>{{ date('d-M-Y', strtotime($item['date'])) }}</td>
                                     <td>
                                         @if($item['is_buyer_accept'] == 1)
-                                            <button class="btn btn-success btn-rounded">Accepted</button>
+                                        <button class="btn btn-success btn-rounded">Accepted</button>
                                         @elseif($item['is_buyer_rebid'] == 1)
-                                            <button class="btn btn-danger btn-rounded">Request for Requotation</button>
+                                        <button class="btn btn-danger btn-rounded">Request for Requotation</button>
                                         @elseif($item['is_buyer_reject'] == 1)
-                                            <button class="btn btn-danger btn-rounded">Rejected</button>
+                                        <button class="btn btn-danger btn-rounded">Rejected</button>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item['is_buyer_rebid'] == 1)
+                                        <form action="{{ route('requotation-request-to-seller') }}" method="POST" style="display:inline!important">
+                                            @csrf
+                                            <input type="hidden" name="seller_id" value="{{ $item['sellerid'] }}">
+                                            <input type="hidden" name="placebid_id" value="{{ $item['id'] }}">
+                                            <input type="hidden" name="placedbid_against_makerequest_id" value="{{ $item['placedbid_against_makerequest_id'] }}">
+
+                                            <button type="submit" class="btn text-white btn-rounded" style="background-color:#00CCCD">
+                                                Request Send to Seller for Requotation
+                                            </button>
+                                        </form>
                                         @endif
                                     </td>
                                 </tr>
                                 @endforeach
                                 @else
-                                    <tr>
-                                        <td colspan="9" class="text-center">No Quotation Response Available</td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="9" class="text-center">No Quotation Response Available</td>
+                                </tr>
                                 @endif
                             </tbody>
                         </table>

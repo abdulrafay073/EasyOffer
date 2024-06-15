@@ -412,12 +412,12 @@ class BuyerDealsController extends Controller
             $dataArray = [];
             foreach ($getids as $item) {
 
-                $data = SellerPlacedBid::where('placedbid_against_makerequest_id', $item->id)->where('is_proceed', 1)->where('admin_margin', '!=', "")->where('admin_forward_quot_to_buyer', 1)->first();
+                $data = SellerPlacedBid::withoutTrashed()->where('placedbid_against_makerequest_id', $item->id)->where('is_proceed', 1)->where('admin_margin', '!=', "")->where('admin_forward_quot_to_buyer', 1)->first();
 
                 if ($data != "") {
 
                     $seller = Seller::where('id', $data->seller_id)->first();
-                    $detail = SellerPlacedBidDetail::where('placedbid_id', $item->id)->first();
+                    $detail = SellerPlacedBidDetail::where('placedbid_id', $data->id)->first();
                     $product = BuyerListing::where('id', $detail->product_id)->first();
 
                     $dataArray[] = [
